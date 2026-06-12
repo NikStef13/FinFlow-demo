@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1B6B5A</color>
+    <color name="colorPrimaryDark">#1A2340</color>
+    <color name="colorAccent">#1B6B5A</color>
+
+    <color name="temnoModra">#1A2340</color>
+    <color name="zelena">#1B6B5A</color>
+    <color name="svetloZelena">#E8F5F1</color>
+    <color name="sivaKartica">#F5F5F5</color>
+    <color name="besediloTemno">#1A1A1A</color>
+    <color name="besediloSivo">#6B7280</color>
+    <color name="rdeca">#EF4444</color>
+    <color name="bela">#FFFFFF</color>
+</resources>

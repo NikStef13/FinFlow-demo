@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sivaKartica">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/zelena"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dodaj cilj"
+                android:textColor="@color/bela"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- KARTICA: FORMA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bela"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp">
+
+            <!-- IME CILJA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ime cilja"
+                android:textColor="@color/besediloSivo"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_ime_cilja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="npr. Poletno potovanje"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/sivaKartica" />
+
+            <!-- CILJNI ZNESEK -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ciljni znesek (€)"
+                android:textColor="@color/besediloSivo"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/et_ciljni_znesek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/sivaKartica" />
+
+            <!-- TRENUTNO PRIHRANJENO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trenutno prihranjeno (€)"
+                android:textColor="@color/besediloSivo"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/et_prihranjeno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/sivaKartica" />
+
+            <!-- ROK -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rok (neobvezno)"
+                android:textColor="@color/besediloSivo"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/et_rok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="npr. 1. 7. 2026"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/sivaKartica" />
+
+            <!-- IKONA CILJA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ikona"
+                android:textColor="@color/besediloSivo"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/btn_ikona_potovanje"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Potovanje"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+                <Button
+                    android:id="@+id/btn_ikona_telefon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Telefon"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+                <Button
+                    android:id="@+id/btn_ikona_avto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Avto"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/btn_ikona_stanovanje"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Stanovanje"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+                <Button
+                    android:id="@+id/btn_ikona_izobrazba"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Izobrazba"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+                <Button
+                    android:id="@+id/btn_ikona_drugo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Drugo"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/sivaKartica"
+                    android:textColor="@color/besediloTemno" />
+
+            </LinearLayout>
+
+            <!-- GUMB DODAJ -->
+            <Button
+                android:id="@+id/btn_dodaj_cilj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dodaj cilj"
+                android:textSize="16sp"
+                android:textColor="@color/bela"
+                android:backgroundTint="@color/zelena"
+                android:layout_marginTop="24dp"
+                android:padding="14dp" />
+
+            <!-- GUMB PREKLIČI -->
+            <Button
+                android:id="@+id/btn_preklici"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prekliči"
+                android:textSize="16sp"
+                android:textColor="@color/besediloSivo"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

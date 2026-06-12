@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sivaKartica">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/temnoModra"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spremljanje porabe"
+                android:textColor="@color/bela"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_skupna_poraba"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="€0.00"
+                android:textColor="@color/bela"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skupaj porabljeno ta mesec"
+                android:textColor="@color/bela"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+        <!-- KARTICA: RAZDELITEV PO KATEGORIJAH -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bela"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Razdelitev po kategorijah"
+                android:textColor="@color/besediloTemno"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_graf_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="Graf bo dodan kasneje"
+                android:textColor="@color/besediloSivo"
+                android:gravity="center"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+
+        <!-- KARTICA: DODAJ STROŠEK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bela"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dodaj strošek"
+                android:textColor="@color/besediloTemno"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_dodaj_strosek"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+                android:textSize="20sp"
+                android:padding="0dp"
+                android:backgroundTint="@color/temnoModra"
+                android:textColor="@color/bela" />
+
+        </LinearLayout>
+
+        <!-- KARTICA: NEDAVNI STROŠKI -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bela"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nedavni stroški"
+                android:textColor="@color/besediloTemno"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/lv_stroski"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:divider="@null" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

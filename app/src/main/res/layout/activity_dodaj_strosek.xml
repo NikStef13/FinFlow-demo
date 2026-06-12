@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sivaKartica">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/temnoModra"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Dodaj strošek"
+          android:textColor="@color/bela"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- KARTICA: FORMA -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bela"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+      <!-- ZNESEK -->
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Znesek (€)"
+          android:textColor="@color/besediloSivo"
+          android:textSize="14sp" />
+
+      <EditText
+          android:id="@+id/et_znesek"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="0.00"
+          android:inputType="numberDecimal"
+          android:textSize="16sp"
+          android:padding="12dp"
+          android:layout_marginTop="6dp"
+          android:background="@color/sivaKartica" />
+
+      <!-- KATEGORIJA -->
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Kategorija"
+          android:textColor="@color/besediloSivo"
+          android:textSize="14sp"
+          android:layout_marginTop="16dp" />
+
+      <!-- VRSTICA 1 -->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btn_hrana"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hrana"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+        <Button
+            android:id="@+id/btn_kava"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kava"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+        <Button
+            android:id="@+id/btn_prevoz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Prevoz"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+      </LinearLayout>
+
+      <!-- VRSTICA 2 -->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btn_stanovanje"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stanovanje"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+        <Button
+            android:id="@+id/btn_tehnologija"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tehnologija"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+        <Button
+            android:id="@+id/btn_drugo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drugo"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/sivaKartica"
+            android:textColor="@color/besediloTemno" />
+
+      </LinearLayout>
+
+      <!-- OPIS -->
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Opis (neobvezno)"
+          android:textColor="@color/besediloSivo"
+          android:textSize="14sp"
+          android:layout_marginTop="16dp" />
+
+      <EditText
+          android:id="@+id/et_opis"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Vnesite opis..."
+          android:textSize="16sp"
+          android:padding="12dp"
+          android:layout_marginTop="6dp"
+          android:background="@color/sivaKartica" />
+
+      <!-- GUMB DODAJ -->
+      <Button
+          android:id="@+id/btn_dodaj"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Dodaj strošek"
+          android:textSize="16sp"
+          android:textColor="@color/bela"
+          android:backgroundTint="@color/temnoModra"
+          android:layout_marginTop="24dp"
+          android:padding="14dp" />
+
+      <!-- GUMB PREKLIČI -->
+      <Button
+          android:id="@+id/btn_preklici"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Prekliči"
+          android:textSize="16sp"
+          android:textColor="@color/besediloSivo"
+          android:backgroundTint="@android:color/transparent"
+          android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</ScrollView>

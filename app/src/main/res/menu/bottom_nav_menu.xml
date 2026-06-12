@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_poraba"
+        android:icon="@drawable/ic_poraba"
+        android:title="Poraba" />
+
+    <item
+        android:id="@+id/nav_proracun"
+        android:icon="@drawable/ic_proracun"
+        android:title="Proračun" />
+
+    <item
+        android:id="@+id/nav_cilji"
+        android:icon="@drawable/ic_cilji"
+        android:title="Cilji" />
+
+</menu>
