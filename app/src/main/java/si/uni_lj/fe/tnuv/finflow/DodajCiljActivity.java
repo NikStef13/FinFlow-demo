@@ -67,15 +67,15 @@ public class DodajCiljActivity extends AppCompatActivity {
         // Dodaj cilj
         btnDodajCilj.setOnClickListener(v -> {
             String ime = etImeCilja.getText().toString();
-            String znesek = etCiljniZnesek.getText().toString();
-            String prihranjeno = etPrihranjeno.getText().toString();
+            String znesekStr = etCiljniZnesek.getText().toString();
+            String prihranjenoStr = etPrihranjeno.getText().toString();
             String rok = etRok.getText().toString();
 
             if (ime.isEmpty()) {
                 Toast.makeText(this, "Vnesite ime cilja!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (znesek.isEmpty()) {
+            if (znesekStr.isEmpty()) {
                 Toast.makeText(this, "Vnesite ciljni znesek!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -84,9 +84,23 @@ public class DodajCiljActivity extends AppCompatActivity {
                 return;
             }
 
-            // Zaenkrat samo Toast — kasneje povežemo z bazo
-            Toast.makeText(this, "Cilj dodan: " + ime + " €" + znesek, Toast.LENGTH_SHORT).show();
-            finish();
+            try {
+                double znesek = Double.parseDouble(znesekStr);
+                double prihranjeno = prihranjenoStr.isEmpty() ? 0 : Double.parseDouble(prihranjenoStr);
+
+                Cilj novCilj = new Cilj(ime, znesek, prihranjeno, rok, izbranIkona);
+
+                AppDatabase db = AppDatabase.getDatabase(this);
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    db.dao().insertCilj(novCilj);
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Cilj uspešno dodan!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    });
+                });
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         // Prekliči

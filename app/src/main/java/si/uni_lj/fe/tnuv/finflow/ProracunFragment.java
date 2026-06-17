@@ -77,14 +77,22 @@ public class ProracunFragment extends Fragment {
 
     private void posodobiPrikaz() {
         float limit = sp.getFloat("limit", 0f);
-        float porabljeno = sp.getFloat("porabljeno", 0f);
-        float preostalo = limit - porabljeno;
-        int odstotek = limit > 0 ? (int) ((porabljeno / limit) * 100) : 0;
 
-        tvLimit.setText(String.format("€%.2f", limit));
-        tvPorabljeno.setText(String.format("€%.2f", porabljeno));
-        tvPreostalo.setText(String.format("€%.2f", preostalo));
-        tvOdstotek.setText(odstotek + "%");
-        pbProracun.setProgress(odstotek);
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            double porabljeno = db.dao().getTotalConsumption();
+            float preostalo = limit - (float) porabljeno;
+            int odstotek = limit > 0 ? (int) ((porabljeno / limit) * 100) : 0;
+
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    tvLimit.setText(String.format("€%.2f", limit));
+                    tvPorabljeno.setText(String.format("€%.2f", porabljeno));
+                    tvPreostalo.setText(String.format("€%.2f", preostalo));
+                    tvOdstotek.setText(odstotek + "%");
+                    pbProracun.setProgress(odstotek);
+                });
+            }
+        });
     }
 }

@@ -62,9 +62,10 @@ public class DodajStrosekActivity extends AppCompatActivity {
 
         // Dodaj strošek
         btnDodaj.setOnClickListener(v -> {
-            String znesek = etZnesek.getText().toString();
+            String znesekStr = etZnesek.getText().toString();
+            String opis = etOpis.getText().toString();
 
-            if (znesek.isEmpty()) {
+            if (znesekStr.isEmpty()) {
                 Toast.makeText(this, "Vnesite znesek!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -73,9 +74,23 @@ public class DodajStrosekActivity extends AppCompatActivity {
                 return;
             }
 
-            // Zaenkrat samo Toast — kasneje povežemo z bazo
-            Toast.makeText(this, "Strošek dodan: €" + znesek + " (" + izbranKategorija + ")", Toast.LENGTH_SHORT).show();
-            finish();
+            try {
+                double znesek = Double.parseDouble(znesekStr);
+                long datum = System.currentTimeMillis();
+
+                Strosek novStrosek = new Strosek(znesek, opis, izbranKategorija, datum);
+
+                AppDatabase db = AppDatabase.getDatabase(this);
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    db.dao().insertStrosek(novStrosek);
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Strošek uspešno dodan!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    });
+                });
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         // Prekliči
