@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DodajStrosekActivity extends AppCompatActivity {
 
     String izbranKategorija = "";
+    int strosekId = -1;
+    long obstojeciDatum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,38 +31,41 @@ public class DodajStrosekActivity extends AppCompatActivity {
         Button btnDodaj = findViewById(R.id.btn_dodaj);
         Button btnPreklici = findViewById(R.id.btn_preklici);
 
-        // Poslušalci za kategorije
+        Button[] gumbiKategorij = {btnHrana, btnKava, btnPrevoz, btnStanovanje, btnTehnologija, btnDrugo};
+
         View.OnClickListener kategorija = v -> {
-            // Resetiraj vse gumbe
-            btnHrana.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnKava.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnPrevoz.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnStanovanje.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnTehnologija.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnDrugo.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-
-            // Resetiraj barvo teksta vseh gumbov
-            btnHrana.setTextColor(getColor(R.color.besediloTemno));
-            btnKava.setTextColor(getColor(R.color.besediloTemno));
-            btnPrevoz.setTextColor(getColor(R.color.besediloTemno));
-            btnStanovanje.setTextColor(getColor(R.color.besediloTemno));
-            btnTehnologija.setTextColor(getColor(R.color.besediloTemno));
-            btnDrugo.setTextColor(getColor(R.color.besediloTemno));
-
-            // Označi izbrani gumb
-            ((Button) v).setBackgroundTintList(getColorStateList(R.color.zelena));
+            for (Button b : gumbiKategorij) {
+                b.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
+                b.setTextColor(getColor(R.color.besediloTemno));
+            }
+            ((Button) v).setBackgroundTintList(getColorStateList(R.color.temnoModra));
             ((Button) v).setTextColor(getColor(R.color.bela));
             izbranKategorija = ((Button) v).getText().toString();
         };
 
-        btnHrana.setOnClickListener(kategorija);
-        btnKava.setOnClickListener(kategorija);
-        btnPrevoz.setOnClickListener(kategorija);
-        btnStanovanje.setOnClickListener(kategorija);
-        btnTehnologija.setOnClickListener(kategorija);
-        btnDrugo.setOnClickListener(kategorija);
+        for (Button b : gumbiKategorij) {
+            b.setOnClickListener(kategorija);
+        }
 
-        // Dodaj strošek
+        strosekId = getIntent().getIntExtra("strosek_id", -1);
+        if (strosekId != -1) {
+            btnDodaj.setText("Shrani spremembe");
+            AppDatabase db = AppDatabase.getDatabase(this);
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                Strosek obstojeci = db.dao().getStrosekById(strosekId);
+                obstojeciDatum = obstojeci.datum;
+                runOnUiThread(() -> {
+                    etZnesek.setText(String.valueOf(obstojeci.znesek));
+                    etOpis.setText(obstojeci.opis);
+                    for (Button b : gumbiKategorij) {
+                        if (b.getText().toString().equals(obstojeci.kategorija)) {
+                            b.performClick();
+                        }
+                    }
+                });
+            });
+        }
+
         btnDodaj.setOnClickListener(v -> {
             String znesekStr = etZnesek.getText().toString();
             String opis = etOpis.getText().toString();
@@ -76,24 +81,34 @@ public class DodajStrosekActivity extends AppCompatActivity {
 
             try {
                 double znesek = Double.parseDouble(znesekStr);
-                long datum = System.currentTimeMillis();
-
-                Strosek novStrosek = new Strosek(znesek, opis, izbranKategorija, datum);
-
                 AppDatabase db = AppDatabase.getDatabase(this);
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    db.dao().insertStrosek(novStrosek);
-                    runOnUiThread(() -> {
-                        Toast.makeText(this, "Strošek uspešno dodan!", Toast.LENGTH_SHORT).show();
-                        finish();
+
+                if (strosekId != -1) {
+                    Strosek posodobljen = new Strosek(znesek, opis, izbranKategorija, obstojeciDatum);
+                    posodobljen.id = strosekId;
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        db.dao().updateStrosek(posodobljen);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Strošek posodobljen!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        });
                     });
-                });
+                } else {
+                    long datum = System.currentTimeMillis();
+                    Strosek novStrosek = new Strosek(znesek, opis, izbranKategorija, datum);
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        db.dao().insertStrosek(novStrosek);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Strošek uspešno dodan!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        });
+                    });
+                }
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Prekliči
         btnPreklici.setOnClickListener(v -> finish());
     }
 }

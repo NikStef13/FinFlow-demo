@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DodajCiljActivity extends AppCompatActivity {
 
     String izbranIkona = "";
+    int ciljId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,43 +29,46 @@ public class DodajCiljActivity extends AppCompatActivity {
         Button btnIkonaIzobrazba = findViewById(R.id.btn_ikona_izobrazba);
         Button btnIkonaDrugo = findViewById(R.id.btn_ikona_drugo);
 
-
-
         Button btnDodajCilj = findViewById(R.id.btn_dodaj_cilj);
         Button btnPreklici = findViewById(R.id.btn_preklici);
 
-        // Poslušalci za ikone
+        Button[] gumbiIkon = {btnIkonaPotovanje, btnIkonaTelefon, btnIkonaAvto,
+                btnIkonaStanovanje, btnIkonaIzobrazba, btnIkonaDrugo};
+
         View.OnClickListener ikona = v -> {
-            // Resetiraj vse gumbe
-            btnIkonaPotovanje.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnIkonaTelefon.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnIkonaAvto.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnIkonaStanovanje.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnIkonaIzobrazba.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-            btnIkonaDrugo.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
-
-            btnIkonaPotovanje.setTextColor(getColor(R.color.besediloTemno));
-            btnIkonaTelefon.setTextColor(getColor(R.color.besediloTemno));
-            btnIkonaAvto.setTextColor(getColor(R.color.besediloTemno));
-            btnIkonaStanovanje.setTextColor(getColor(R.color.besediloTemno));
-            btnIkonaIzobrazba.setTextColor(getColor(R.color.besediloTemno));
-            btnIkonaDrugo.setTextColor(getColor(R.color.besediloTemno));
-
-            // Označi izbrani gumb
+            for (Button b : gumbiIkon) {
+                b.setBackgroundTintList(getColorStateList(R.color.sivaKartica));
+                b.setTextColor(getColor(R.color.besediloTemno));
+            }
             ((Button) v).setBackgroundTintList(getColorStateList(R.color.zelena));
             ((Button) v).setTextColor(getColor(R.color.bela));
             izbranIkona = ((Button) v).getText().toString();
         };
 
-        btnIkonaPotovanje.setOnClickListener(ikona);
-        btnIkonaTelefon.setOnClickListener(ikona);
-        btnIkonaAvto.setOnClickListener(ikona);
-        btnIkonaStanovanje.setOnClickListener(ikona);
-        btnIkonaIzobrazba.setOnClickListener(ikona);
-        btnIkonaDrugo.setOnClickListener(ikona);
+        for (Button b : gumbiIkon) {
+            b.setOnClickListener(ikona);
+        }
 
+        ciljId = getIntent().getIntExtra("cilj_id", -1);
+        if (ciljId != -1) {
+            btnDodajCilj.setText("Shrani spremembe");
+            AppDatabase db = AppDatabase.getDatabase(this);
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                Cilj obstojeci = db.dao().getCiljById(ciljId);
+                runOnUiThread(() -> {
+                    etImeCilja.setText(obstojeci.ime);
+                    etCiljniZnesek.setText(String.valueOf(obstojeci.ciljniZnesek));
+                    etPrihranjeno.setText(String.valueOf(obstojeci.prihranjeno));
+                    etRok.setText(obstojeci.rok);
+                    for (Button b : gumbiIkon) {
+                        if (b.getText().toString().equals(obstojeci.ikona)) {
+                            b.performClick();
+                        }
+                    }
+                });
+            });
+        }
 
-        // Dodaj cilj
         btnDodajCilj.setOnClickListener(v -> {
             String ime = etImeCilja.getText().toString();
             String znesekStr = etCiljniZnesek.getText().toString();
@@ -87,23 +91,33 @@ public class DodajCiljActivity extends AppCompatActivity {
             try {
                 double znesek = Double.parseDouble(znesekStr);
                 double prihranjeno = prihranjenoStr.isEmpty() ? 0 : Double.parseDouble(prihranjenoStr);
-
-                Cilj novCilj = new Cilj(ime, znesek, prihranjeno, rok, izbranIkona);
-
                 AppDatabase db = AppDatabase.getDatabase(this);
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    db.dao().insertCilj(novCilj);
-                    runOnUiThread(() -> {
-                        Toast.makeText(this, "Cilj uspešno dodan!", Toast.LENGTH_SHORT).show();
-                        finish();
+
+                if (ciljId != -1) {
+                    Cilj posodobljen = new Cilj(ime, znesek, prihranjeno, rok, izbranIkona);
+                    posodobljen.id = ciljId;
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        db.dao().updateCilj(posodobljen);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Cilj posodobljen!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        });
                     });
-                });
+                } else {
+                    Cilj novCilj = new Cilj(ime, znesek, prihranjeno, rok, izbranIkona);
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        db.dao().insertCilj(novCilj);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Cilj uspešno dodan!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        });
+                    });
+                }
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Prekliči
         btnPreklici.setOnClickListener(v -> finish());
     }
 }

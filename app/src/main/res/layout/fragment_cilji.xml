@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Varčevalni cilji"
                 android:textColor="@color/bela"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="od €0.00 skupnega cilja"
                 android:textColor="@color/bela"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:layout_marginTop="4dp" />
 
         </LinearLayout>

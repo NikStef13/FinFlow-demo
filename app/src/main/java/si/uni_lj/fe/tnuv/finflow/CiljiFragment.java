@@ -1,21 +1,20 @@
 package si.uni_lj.fe.tnuv.finflow;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CiljiFragment extends Fragment {
+public class CiljiFragment extends Fragment implements CiljAdapter.Listener {
 
     TextView tvSkupniCilji, tvSkupniCiljiOpis;
     ListView lvCilji;
@@ -64,15 +63,46 @@ public class CiljiFragment extends Fragment {
                     tvSkupniCilji.setText(String.format("€%.2f", finalSkupajPrihranjeno));
                     tvSkupniCiljiOpis.setText(String.format("od €%.2f skupnega cilja", finalSkupniCilj));
 
-                    List<String> ciljiString = new ArrayList<>();
-                    for (Cilj c : cilji) {
-                        ciljiString.add(c.ikona + " " + c.ime + ": €" + c.prihranjeno + " / €" + c.ciljniZnesek);
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                            android.R.layout.simple_list_item_1, ciljiString);
+                    CiljAdapter adapter = new CiljAdapter(getContext(), cilji, this);
                     lvCilji.setAdapter(adapter);
                 });
+            }
+        });
+    }
+
+    @Override
+    public void onUredi(Cilj cilj) {
+        Intent intent = new Intent(getActivity(), DodajCiljActivity.class);
+        intent.putExtra("cilj_id", cilj.id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onIzbrisi(Cilj cilj) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Izbriši cilj")
+                .setMessage("Ali res želiš izbrisati ta cilj?")
+                .setPositiveButton("Izbriši", (dialog, which) -> {
+                    AppDatabase db = AppDatabase.getDatabase(getContext());
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        db.dao().deleteCilj(cilj);
+                        if (getActivity() != null) {
+                            getActivity().runOnUiThread(this::posodobiPrikaz);
+                        }
+                    });
+                })
+                .setNegativeButton("Prekliči", null)
+                .show();
+    }
+
+    @Override
+    public void onSpremenjenoPrihranjeno(Cilj cilj, double noviZnesek) {
+        cilj.prihranjeno = noviZnesek;
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            db.dao().updateCilj(cilj);
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(this::posodobiPrikaz);
             }
         });
     }

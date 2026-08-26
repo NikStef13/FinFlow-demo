@@ -12,4 +12,11 @@
     <color name="besediloSivo">#6B7280</color>
     <color name="rdeca">#EF4444</color>
     <color name="bela">#FFFFFF</color>
+
+    <color name="graf1">#1B6B5A</color>
+    <color name="graf2">#1A2340</color>
+    <color name="graf3">#B91C1C</color>
+    <color name="graf4">#6D28D9</color>
+    <color name="graf5">#C2410C</color>
+    <color name="graf6">#374151</color>
 </resources>
