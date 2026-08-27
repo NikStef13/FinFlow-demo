@@ -4,16 +4,16 @@
     <item
         android:id="@+id/nav_poraba"
         android:icon="@drawable/ic_poraba"
-        android:title="Poraba" />
+        android:title="@string/nav_poraba" />
 
     <item
         android:id="@+id/nav_proracun"
         android:icon="@drawable/ic_proracun"
-        android:title="Proračun" />
+        android:title="@string/nav_proracun" />
 
     <item
         android:id="@+id/nav_cilji"
         android:icon="@drawable/ic_cilji"
-        android:title="Cilji" />
+        android:title="@string/nav_cilji" />
 
 </menu>

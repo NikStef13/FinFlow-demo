@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dodaj cilj"
+                android:text="@string/dodaj_cilj_naslov"
                 android:textColor="@color/bela"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ime cilja"
+                android:text="@string/dodaj_cilj_ime_label"
                 android:textColor="@color/besediloSivo"
                 android:textSize="14sp" />
 
@@ -52,7 +52,7 @@
                 android:id="@+id/et_ime_cilja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="npr. Poletno potovanje"
+                android:hint="@string/dodaj_cilj_ime_hint"
                 android:inputType="text"
                 android:textSize="16sp"
                 android:padding="12dp"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ciljni znesek (€)"
+                android:text="@string/dodaj_cilj_znesek_label"
                 android:textColor="@color/besediloSivo"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp" />
@@ -72,7 +72,7 @@
                 android:id="@+id/et_ciljni_znesek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="0.00"
+                android:hint="@string/znesek_hint"
                 android:inputType="numberDecimal"
                 android:textSize="16sp"
                 android:padding="12dp"
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trenutno prihranjeno (€)"
+                android:text="@string/dodaj_cilj_prihranjeno_label"
                 android:textColor="@color/besediloSivo"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp" />
@@ -92,7 +92,7 @@
                 android:id="@+id/et_prihranjeno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="0.00"
+                android:hint="@string/znesek_hint"
                 android:inputType="numberDecimal"
                 android:textSize="16sp"
                 android:padding="12dp"
@@ -103,7 +103,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rok (neobvezno)"
+                android:text="@string/dodaj_cilj_rok_label"
                 android:textColor="@color/besediloSivo"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp" />
@@ -112,18 +112,18 @@
                 android:id="@+id/et_rok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="npr. 1. 7. 2026"
+                android:hint="@string/dodaj_cilj_rok_hint"
                 android:inputType="text"
                 android:textSize="16sp"
                 android:padding="12dp"
                 android:layout_marginTop="6dp"
                 android:background="@color/sivaKartica" />
 
-            <!-- IKONA CILJA -->
+            <!-- KATEGORIJA CILJA -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ikona"
+                android:text="@string/dodaj_strosek_kategorija"
                 android:textColor="@color/besediloSivo"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp" />
@@ -139,7 +139,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Potovanje"
+                    android:text="@string/kat_potovanje"
                     android:textSize="12sp"
                     android:maxLines="1"
                     android:layout_marginEnd="4dp"
@@ -151,7 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Telefon"
+                    android:text="@string/kat_telefon"
                     android:textSize="11sp"
                     android:maxLines="1"
                     android:layout_marginStart="4dp"
@@ -164,7 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Avto"
+                    android:text="@string/kat_avto"
                     android:textSize="11sp"
                     android:maxLines="1"
                     android:layout_marginStart="4dp"
@@ -184,7 +184,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Stanovanje"
+                    android:text="@string/kat_stanovanje"
                     android:textSize="12sp"
                     android:maxLines="1"
                     android:layout_marginEnd="4dp"
@@ -196,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Izobrazba"
+                    android:text="@string/kat_izobrazba"
                     android:textSize="11sp"
                     android:maxLines="1"
                     android:layout_marginStart="4dp"
@@ -209,7 +209,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Drugo"
+                    android:text="@string/kat_drugo"
                     android:textSize="11sp"
                     android:maxLines="1"
                     android:layout_marginStart="4dp"
@@ -223,7 +223,7 @@
                 android:id="@+id/btn_dodaj_cilj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dodaj cilj"
+                android:text="@string/dodaj_cilj_gumb_dodaj"
                 android:textSize="16sp"
                 android:textColor="@color/bela"
                 android:backgroundTint="@color/zelena"
@@ -235,7 +235,7 @@
                 android:id="@+id/btn_preklici"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prekliči"
+                android:text="@string/gumb_preklici"
                 android:textSize="16sp"
                 android:textColor="@color/besediloSivo"
                 android:backgroundTint="@android:color/transparent"

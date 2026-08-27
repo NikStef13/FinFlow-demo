@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Spremljanje porabe"
+                android:text="@string/poraba_naslov"
                 android:textColor="@color/bela"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skupaj porabljeno ta mesec"
+                android:text="@string/poraba_skupaj_mesec"
                 android:textColor="@color/bela"
                 android:textSize="18sp"
                 android:layout_marginTop="4dp" />
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Razdelitev po kategorijah"
+                android:text="@string/poraba_razdelitev_kategorije"
                 android:textColor="@color/besediloTemno"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -68,7 +68,7 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart_poraba"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="280dp"
                 android:layout_marginTop="12dp" />
 
         </LinearLayout>
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Dodaj strošek"
+                android:text="@string/poraba_dodaj_strosek"
                 android:textColor="@color/besediloTemno"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -121,17 +121,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nedavni stroški"
+                android:text="@string/poraba_nedavni_stroski"
                 android:textColor="@color/besediloTemno"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <ListView
-                android:id="@+id/lv_stroski"
+            <LinearLayout
+                android:id="@+id/ll_stroski_container"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:divider="@null" />
+                android:orientation="vertical" />
 
         </LinearLayout>
 

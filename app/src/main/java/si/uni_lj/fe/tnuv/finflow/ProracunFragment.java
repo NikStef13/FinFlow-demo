@@ -13,13 +13,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 import androidx.fragment.app.Fragment;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ProracunFragment extends Fragment {
 
     SharedPreferences sp;
     TextView tvLimit, tvOdstotek, tvPorabljeno, tvPreostalo;
     ProgressBar pbProracun;
-    LinearLayout layoutVnosLimit;
+    LinearLayout layoutVnosLimit, llNasveti;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +39,7 @@ public class ProracunFragment extends Fragment {
         tvPreostalo = view.findViewById(R.id.tv_preostalo);
         pbProracun = view.findViewById(R.id.pb_proracun);
         layoutVnosLimit = view.findViewById(R.id.layout_vnos_limit);
+        llNasveti = view.findViewById(R.id.ll_nasveti_container);
 
         ImageButton btnUrediLimit = view.findViewById(R.id.btn_uredi_limit);
         Button btnPotrdiLimit = view.findViewById(R.id.btn_potrdi_limit);
@@ -86,13 +92,101 @@ public class ProracunFragment extends Fragment {
 
             if (getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
-                    tvLimit.setText(String.format("€%.2f", limit));
+                    String limitStr = String.format("€%.2f", limit);
+                    tvLimit.setText(limitStr);
                     tvPorabljeno.setText(String.format("€%.2f", porabljeno));
                     tvPreostalo.setText(String.format("€%.2f", preostalo));
                     tvOdstotek.setText(odstotek + "%");
                     pbProracun.setProgress(odstotek);
+
+                    generirajNasvete(db);
                 });
             }
         });
+    }
+
+    private void generirajNasvete(AppDatabase db) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            List<KategorijaVsota> porabaPoKategorijah = db.dao().getPorabaPoKategorijah();
+            
+            // Sortiranje po vsoti (padajoče)
+            Collections.sort(porabaPoKategorijah, (o1, o2) -> Double.compare(o2.vsota, o1.vsota));
+
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    llNasveti.removeAllViews();
+
+                    int stNasvetov = 0;
+                    for (KategorijaVsota kv : porabaPoKategorijah) {
+                        if (stNasvetov >= 3) break;
+                        
+                        String[] nasvet = dobiNasvetZaKategorijo(kv.kategorija);
+                        if (nasvet != null) {
+                            dodajNasvetVUI(nasvet[0], nasvet[1]);
+                            stNasvetov++;
+                        }
+                    }
+
+                    // Če ni dovolj porabe, dodaj splošne nasvete
+                    if (stNasvetov == 0) {
+                        dodajNasvetVUI(getString(R.string.proracun_nasvet_prazen_naslov), getString(R.string.proracun_nasvet_prazen_opis));
+                    }
+                });
+            }
+        });
+    }
+
+    private String[] dobiNasvetZaKategorijo(String kategorija) {
+        Map<String, String[]> nasvetiMap = new HashMap<>();
+
+        nasvetiMap.put("Hrana", new String[]{getString(R.string.nasvet_hrana_naslov), getString(R.string.nasvet_hrana_opis)});
+        nasvetiMap.put("Kava", new String[]{getString(R.string.nasvet_kava_naslov), getString(R.string.nasvet_kava_opis)});
+        nasvetiMap.put("Prevoz", new String[]{getString(R.string.nasvet_prevoz_naslov), getString(R.string.nasvet_prevoz_opis)});
+        nasvetiMap.put("Stanovanje", new String[]{getString(R.string.nasvet_stanovanje_naslov), getString(R.string.nasvet_stanovanje_opis)});
+        nasvetiMap.put("Tehnologija", new String[]{getString(R.string.nasvet_tehnologija_naslov), getString(R.string.nasvet_tehnologija_opis)});
+        nasvetiMap.put("Drugo", new String[]{getString(R.string.nasvet_drugo_naslov), getString(R.string.nasvet_drugo_opis)});
+
+        return nasvetiMap.get(kategorija);
+    }
+
+    private void dodajNasvetVUI(String naslov, String opis) {
+        LinearLayout tipLayout = new LinearLayout(getContext());
+        tipLayout.setOrientation(LinearLayout.VERTICAL);
+        tipLayout.setBackgroundResource(R.color.sivaKartica);
+        tipLayout.setPadding(dpToPx(12), dpToPx(12), dpToPx(12), dpToPx(12));
+        
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, dpToPx(8), 0, 0);
+        tipLayout.setLayoutParams(params);
+
+        TextView tvNaslov = new TextView(getContext());
+        tvNaslov.setText(naslov);
+        tvNaslov.setTextColor(getResources().getColor(R.color.besediloTemno));
+        tvNaslov.setTextSize(14);
+        tvNaslov.setTypeface(null, android.graphics.Typeface.BOLD);
+
+        TextView tvOpis = new TextView(getContext());
+        tvOpis.setText(opis);
+        tvOpis.setTextColor(getResources().getColor(R.color.besediloSivo));
+        tvOpis.setTextSize(13);
+        
+        LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        descParams.setMargins(0, dpToPx(2), 0, 0);
+        tvOpis.setLayoutParams(descParams);
+
+        tipLayout.addView(tvNaslov);
+        tipLayout.addView(tvOpis);
+        llNasveti.addView(tipLayout);
+    }
+
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
     }
 }

@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -25,7 +26,7 @@ import java.util.List;
 public class PorabaFragment extends Fragment implements StrosekAdapter.Listener {
 
     TextView tvSkupnaPoraba;
-    ListView lvStroski;
+    LinearLayout llStroski;
     PieChart chartPoraba;
 
     @Override
@@ -34,7 +35,7 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
         View view = inflater.inflate(R.layout.fragment_poraba, container, false);
 
         tvSkupnaPoraba = view.findViewById(R.id.tv_skupna_poraba);
-        lvStroski = view.findViewById(R.id.lv_stroski);
+        llStroski = view.findViewById(R.id.ll_stroski_container);
         chartPoraba = view.findViewById(R.id.chart_poraba);
 
         Button btnDodajStrosek = view.findViewById(R.id.btn_dodaj_strosek);
@@ -63,8 +64,11 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
                 getActivity().runOnUiThread(() -> {
                     tvSkupnaPoraba.setText(String.format("€%.2f", skupaj));
 
+                    llStroski.removeAllViews();
                     StrosekAdapter adapter = new StrosekAdapter(getContext(), stroski, this);
-                    lvStroski.setAdapter(adapter);
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        llStroski.addView(adapter.getView(i, null, llStroski));
+                    }
 
                     prikaziGraf(poKategorijah);
                 });
@@ -82,9 +86,9 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
     @Override
     public void onIzbrisi(Strosek strosek) {
         new AlertDialog.Builder(getContext())
-                .setTitle("Izbriši strošek")
-                .setMessage("Ali res želiš izbrisati ta vnos?")
-                .setPositiveButton("Izbriši", (dialog, which) -> {
+                .setTitle(R.string.poraba_izbrisi_naslov)
+                .setMessage(R.string.poraba_izbrisi_potrditev)
+                .setPositiveButton(R.string.gumb_izbrisi, (dialog, which) -> {
                     AppDatabase db = AppDatabase.getDatabase(getContext());
                     AppDatabase.databaseWriteExecutor.execute(() -> {
                         db.dao().deleteStrosek(strosek);
@@ -93,7 +97,7 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
                         }
                     });
                 })
-                .setNegativeButton("Prekliči", null)
+                .setNegativeButton(R.string.gumb_preklici, null)
                 .show();
     }
 
@@ -115,6 +119,7 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
         );
         dataSet.setValueTextColor(Color.WHITE);
         dataSet.setValueTextSize(16f);
+        dataSet.setDrawValues(false);
 
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter(chartPoraba));
@@ -124,8 +129,25 @@ public class PorabaFragment extends Fragment implements StrosekAdapter.Listener 
         chartPoraba.getDescription().setEnabled(false);
         chartPoraba.setEntryLabelColor(Color.WHITE);
         chartPoraba.setEntryLabelTextSize(16f);
+        chartPoraba.setDrawEntryLabels(false);
         chartPoraba.setDrawHoleEnabled(false);
-        chartPoraba.getLegend().setEnabled(false);
+        
+        Legend l = chartPoraba.getLegend();
+        l.setEnabled(true);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setWordWrapEnabled(true);
+        l.setMaxSizePercent(0.85f);
+        l.setYOffset(10f);
+        l.setXOffset(0f);
+        l.setXEntrySpace(8f);
+        l.setYEntrySpace(5f);
+        l.setFormToTextSpace(6f);
+        l.setForm(Legend.LegendForm.CIRCLE);
+        l.setTextSize(11f);
+        l.setTextColor(getResources().getColor(R.color.besediloTemno));
 
         chartPoraba.animateY(600);
         chartPoraba.invalidate();

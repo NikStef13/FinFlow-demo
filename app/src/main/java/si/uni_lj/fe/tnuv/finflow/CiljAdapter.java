@@ -43,6 +43,7 @@ public class CiljAdapter extends ArrayAdapter<Cilj> {
         Cilj cilj = getItem(position);
 
         TextView tvNaslov = convertView.findViewById(R.id.tv_cilj_naslov);
+        TextView tvKategorija = convertView.findViewById(R.id.tv_cilj_kategorija);
         TextView tvZnesek = convertView.findViewById(R.id.tv_cilj_znesek);
         TextView tvPreostalo = convertView.findViewById(R.id.tv_cilj_preostalo);
         ProgressBar pbCilj = convertView.findViewById(R.id.pb_cilj);
@@ -52,7 +53,8 @@ public class CiljAdapter extends ArrayAdapter<Cilj> {
 
         TextView tvOdstotek = convertView.findViewById(R.id.tv_cilj_odstotek);
 
-        tvNaslov.setText(cilj.ikona + " " + cilj.ime);
+        tvNaslov.setText(cilj.ime);
+        tvKategorija.setText(cilj.ikona);
         tvZnesek.setText(String.format("€%.2f / €%.2f", cilj.prihranjeno, cilj.ciljniZnesek));
 
         int odstotek = cilj.ciljniZnesek > 0
@@ -63,9 +65,9 @@ public class CiljAdapter extends ArrayAdapter<Cilj> {
 
         double preostalo = cilj.ciljniZnesek - cilj.prihranjeno;
         if (preostalo <= 0) {
-            tvPreostalo.setText("Cilj dosežen! 🎉");
+            tvPreostalo.setText(getContext().getString(R.string.cilji_dosezen));
         } else {
-            tvPreostalo.setText(String.format("Manjka še €%.2f", preostalo));
+            tvPreostalo.setText(getContext().getString(R.string.cilji_manjka, String.format("€%.2f", preostalo)));
         }
 
         btnMore.setOnClickListener(v -> {
@@ -99,8 +101,8 @@ public class CiljAdapter extends ArrayAdapter<Cilj> {
         Button btnPreklici = dialogView.findViewById(R.id.btn_dialog_preklici);
         Button btnPotrdi = dialogView.findViewById(R.id.btn_dialog_potrdi);
 
-        tvNaslov.setText(dodajanje ? "Dodaj prihranek" : "Odbij prihranek");
-        btnPotrdi.setText(dodajanje ? "Dodaj" : "Odbij");
+        tvNaslov.setText(dodajanje ? getContext().getString(R.string.cilj_dialog_dodaj_naslov) : getContext().getString(R.string.cilj_dialog_odbij_naslov));
+        btnPotrdi.setText(dodajanje ? getContext().getString(R.string.cilj_dialog_gumb_dodaj) : getContext().getString(R.string.cilj_dialog_gumb_odbij));
 
         AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setView(dialogView)

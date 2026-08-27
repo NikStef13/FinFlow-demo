@@ -1,5 +1,109 @@
 <resources>
     <string name="app_name">FinFlow</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_poraba">Poraba</string>
+    <string name="nav_proracun">Proračun</string>
+    <string name="nav_cilji">Cilji</string>
+
+    <!-- Poraba Fragment -->
+    <string name="poraba_naslov">Spremljanje porabe</string>
+    <string name="poraba_skupaj_mesec">Skupaj porabljeno ta mesec</string>
+    <string name="poraba_razdelitev_kategorije">Razdelitev po kategorijah</string>
+    <string name="poraba_dodaj_strosek">Dodaj strošek</string>
+    <string name="poraba_nedavni_stroski">Nedavni stroški</string>
+    <string name="poraba_izbrisi_naslov">Izbriši strošek</string>
+    <string name="poraba_izbrisi_potrditev">Ali res želiš izbrisati ta vnos?</string>
+
+    <!-- Proračun Fragment -->
+    <string name="proracun_naslov">Upravljanje proračuna</string>
+    <string name="proracun_opis">Spremljajte svojo mesečno porabo</string>
+    <string name="proracun_mesecni_limit">Mesečni limit</string>
+    <string name="proracun_uredi_limit">Uredi limit</string>
+    <string name="proracun_porabljeno">Porabljeno</string>
+    <string name="proracun_preostalo">Preostalo</string>
+    <string name="proracun_nasveti_naslov">Nasveti za varčevanje</string>
+    <string name="proracun_nasvet_prazen_naslov">Začnite beležiti porabo</string>
+    <string name="proracun_nasvet_prazen_opis">Dodajte svoje prve stroške, da prejmete personalizirane nasvete.</string>
+
+    <!-- Cilji Fragment -->
+    <string name="cilji_naslov">Varčevalni cilji</string>
+    <string name="cilji_skupni_opis">od %s skupnega cilja</string>
+    <string name="cilji_dodaj_nov_cilj">Dodaj nov cilj</string>
+    <string name="cilji_dosezen">Cilj dosežen! 🎉</string>
+    <string name="cilji_manjka">Manjka še %s</string>
+    <string name="cilji_izbrisi_naslov">Izbriši cilj</string>
+    <string name="cilji_izbrisi_potrditev">Ali res želiš izbrisati ta cilj?</string>
+
+    <!-- Dodaj Strošek Activity -->
+    <string name="dodaj_strosek_naslov">Dodaj strošek</string>
+    <string name="dodaj_strosek_znesek">Znesek (€)</string>
+    <string name="dodaj_strosek_kategorija">Kategorija</string>
+    <string name="dodaj_strosek_opis_label">Opis (neobvezno)</string>
+    <string name="dodaj_strosek_opis_hint">Vnesite opis…</string>
+    <string name="dodaj_strosek_gumb_dodaj">Dodaj</string>
+    <string name="dodaj_strosek_gumb_shrani">Shrani spremembe</string>
+    <string name="dodaj_strosek_napaka_znesek">Vnesite znesek!</string>
+    <string name="dodaj_strosek_napaka_kategorija">Izberite kategorijo!</string>
+    <string name="dodaj_strosek_napaka_stevilka">Vnesite veljavno številko!</string>
+    <string name="dodaj_strosek_uspeh_dodan">Strošek uspešno dodan!</string>
+    <string name="dodaj_strosek_uspeh_posodobljen">Strošek posodobljen!</string>
+
+    <!-- Dodaj Cilj Activity -->
+    <string name="dodaj_cilj_naslov">Dodaj cilj</string>
+    <string name="dodaj_cilj_ime_label">Ime cilja</string>
+    <string name="dodaj_cilj_ime_hint">npr. Poletno potovanje</string>
+    <string name="dodaj_cilj_znesek_label">Ciljni znesek (€)</string>
+    <string name="dodaj_cilj_prihranjeno_label">Trenutno prihranjeno (€)</string>
+    <string name="dodaj_cilj_rok_label">Rok (neobvezno)</string>
+    <string name="dodaj_cilj_rok_hint">npr. 1. 7. 2026</string>
+    <string name="dodaj_cilj_gumb_dodaj">Dodaj cilj</string>
+    <string name="dodaj_cilj_napaka_ime">Vnesite ime cilja!</string>
+    <string name="dodaj_cilj_napaka_znesek">Vnesite ciljni znesek!</string>
+    <string name="dodaj_cilj_napaka_ikona">Izberite kategorijo!</string>
+    <string name="dodaj_cilj_uspeh_dodan">Cilj uspešno dodan!</string>
+    <string name="dodaj_cilj_uspeh_posodobljen">Cilj posodobljen!</string>
+
+    <!-- Kategorije -->
+    <string name="kat_hrana">Hrana</string>
+    <string name="kat_kava">Kava</string>
+    <string name="kat_prevoz">Prevoz</string>
+    <string name="kat_stanovanje">Stanovanje</string>
+    <string name="kat_tehnologija">Tehnologija</string>
+    <string name="kat_drugo">Drugo</string>
+    <string name="kat_potovanje">Potovanje</string>
+    <string name="kat_telefon">Telefon</string>
+    <string name="kat_avto">Avto</string>
+    <string name="kat_izobrazba">Izobrazba</string>
+
+    <!-- Splošno -->
+    <string name="gumb_preklici">Prekliči</string>
+    <string name="gumb_potrdi">Potrdi</string>
+    <string name="gumb_izbrisi">Izbriši</string>
+    <string name="gumb_uredi">Uredi</string>
+    <string name="moznosti">Možnosti</string>
+    <string name="znesek_hint">0.00</string>
+
+    <!-- Cilji Dialogi -->
+    <string name="cilj_dialog_dodaj_naslov">Dodaj prihranek</string>
+    <string name="cilj_dialog_odbij_naslov">Odbij prihranek</string>
+    <string name="cilj_dialog_gumb_dodaj">Dodaj</string>
+    <string name="cilj_dialog_gumb_odbij">Odbij</string>
+    <string name="cilj_gumb_odbij_item">− Odbij</string>
+    <string name="cilj_gumb_dodaj_item">+ Dodaj</string>
+
+    <!-- Nasveti Besedila -->
+    <string name="nasvet_hrana_naslov">Načrtujte nakupe</string>
+    <string name="nasvet_hrana_opis">Naredite seznam pred obiskom trgovine in zmanjšajte impulzivne nakupe.</string>
+    <string name="nasvet_kava_naslov">Zmanjšajte stroške za kavo</string>
+    <string name="nasvet_kava_opis">Pripravite kavo doma namesto v kavarni in prihranite več kot 50€ mesečno.</string>
+    <string name="nasvet_prevoz_naslov">Uporabite javni prevoz</string>
+    <string name="nasvet_prevoz_opis">Prihranite pri stroških za gorivo in parkiranje z uporabo avtobusa ali kolesa.</string>
+    <string name="nasvet_stanovanje_naslov">Varčujte z energijo</string>
+    <string name="nasvet_stanovanje_opis">Ugasnite luči v prostorih, kjer niste, in znižajte stroške ogrevanja.</string>
+    <string name="nasvet_tehnologija_naslov">Preverite naročnine</string>
+    <string name="nasvet_tehnologija_opis">Preglejte svoje mesečne naročnine in odpovejte tiste, ki jih ne uporabljate pogosto.</string>
+    <string name="nasvet_drugo_naslov">Spremljajte manjše stroške</string>
+    <string name="nasvet_drugo_opis">Majhni, neopazni stroški se hitro naberejo. Bodite pozorni na vsak evro.</string>
+
 </resources>

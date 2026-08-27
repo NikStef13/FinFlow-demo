@@ -51,7 +51,7 @@ public class DodajCiljActivity extends AppCompatActivity {
 
         ciljId = getIntent().getIntExtra("cilj_id", -1);
         if (ciljId != -1) {
-            btnDodajCilj.setText("Shrani spremembe");
+            btnDodajCilj.setText(R.string.dodaj_strosek_gumb_shrani);
             AppDatabase db = AppDatabase.getDatabase(this);
             AppDatabase.databaseWriteExecutor.execute(() -> {
                 Cilj obstojeci = db.dao().getCiljById(ciljId);
@@ -76,15 +76,15 @@ public class DodajCiljActivity extends AppCompatActivity {
             String rok = etRok.getText().toString();
 
             if (ime.isEmpty()) {
-                Toast.makeText(this, "Vnesite ime cilja!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_cilj_napaka_ime), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (znesekStr.isEmpty()) {
-                Toast.makeText(this, "Vnesite ciljni znesek!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_cilj_napaka_znesek), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (izbranIkona.isEmpty()) {
-                Toast.makeText(this, "Izberite ikono!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_cilj_napaka_ikona), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -99,7 +99,7 @@ public class DodajCiljActivity extends AppCompatActivity {
                     AppDatabase.databaseWriteExecutor.execute(() -> {
                         db.dao().updateCilj(posodobljen);
                         runOnUiThread(() -> {
-                            Toast.makeText(this, "Cilj posodobljen!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.dodaj_cilj_uspeh_posodobljen), Toast.LENGTH_SHORT).show();
                             finish();
                         });
                     });
@@ -108,13 +108,13 @@ public class DodajCiljActivity extends AppCompatActivity {
                     AppDatabase.databaseWriteExecutor.execute(() -> {
                         db.dao().insertCilj(novCilj);
                         runOnUiThread(() -> {
-                            Toast.makeText(this, "Cilj uspešno dodan!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.dodaj_cilj_uspeh_dodan), Toast.LENGTH_SHORT).show();
                             finish();
                         });
                     });
                 }
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_strosek_napaka_stevilka), Toast.LENGTH_SHORT).show();
             }
         });
 

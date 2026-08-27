@@ -13,14 +13,29 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tv_cilj_naslov"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/besediloTemno"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cilj_naslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/besediloTemno"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_cilj_kategorija"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/besediloSivo"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/btn_more"
@@ -28,7 +43,7 @@
             android:layout_height="36dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_more_vert"
-            android:contentDescription="Možnosti" />
+            android:contentDescription="@string/moznosti" />
 
     </LinearLayout>
 
@@ -86,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="− Odbij"
+            android:text="@string/cilj_gumb_odbij_item"
             android:textSize="15sp"
             android:padding="12dp"
             android:backgroundTint="@color/sivaKartica"
@@ -98,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+ Dodaj"
+            android:text="@string/cilj_gumb_dodaj_item"
             android:textSize="15sp"
             android:padding="12dp"
             android:backgroundTint="@color/zelena"

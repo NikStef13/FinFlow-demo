@@ -71,11 +71,11 @@ public class DodajStrosekActivity extends AppCompatActivity {
             String opis = etOpis.getText().toString();
 
             if (znesekStr.isEmpty()) {
-                Toast.makeText(this, "Vnesite znesek!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_strosek_napaka_znesek), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (izbranKategorija.isEmpty()) {
-                Toast.makeText(this, "Izberite kategorijo!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_strosek_napaka_kategorija), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -89,7 +89,7 @@ public class DodajStrosekActivity extends AppCompatActivity {
                     AppDatabase.databaseWriteExecutor.execute(() -> {
                         db.dao().updateStrosek(posodobljen);
                         runOnUiThread(() -> {
-                            Toast.makeText(this, "Strošek posodobljen!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.dodaj_strosek_uspeh_posodobljen), Toast.LENGTH_SHORT).show();
                             finish();
                         });
                     });
@@ -99,13 +99,13 @@ public class DodajStrosekActivity extends AppCompatActivity {
                     AppDatabase.databaseWriteExecutor.execute(() -> {
                         db.dao().insertStrosek(novStrosek);
                         runOnUiThread(() -> {
-                            Toast.makeText(this, "Strošek uspešno dodan!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.dodaj_strosek_uspeh_dodan), Toast.LENGTH_SHORT).show();
                             finish();
                         });
                     });
                 }
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Vnesite veljavno številko!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dodaj_strosek_napaka_stevilka), Toast.LENGTH_SHORT).show();
             }
         });
 

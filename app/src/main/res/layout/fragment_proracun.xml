@@ -10,18 +10,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/temnoModra"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upravljanje proračuna"
+                android:text="@string/proracun_naslov"
                 android:textColor="@color/bela"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -29,10 +31,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Spremljajte svojo mesečno porabo"
+                android:text="@string/proracun_opis"
                 android:textColor="@color/bela"
-                android:textSize="16sp"
-                android:layout_marginTop="4dp" />
+                android:textSize="18sp"
+                android:layout_marginTop="6dp" />
 
         </LinearLayout>
 
@@ -57,7 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mesečni limit"
+                    android:text="@string/proracun_mesecni_limit"
                     android:textColor="@color/besediloSivo"
                     android:textSize="14sp" />
 
@@ -68,7 +70,7 @@
                     android:src="@drawable/ic_uredi"
                     android:backgroundTint="@android:color/transparent"
                     android:tint="@color/besediloSivo"
-                    android:contentDescription="Uredi limit" />
+                    android:contentDescription="@string/proracun_uredi_limit" />
 
             </LinearLayout>
 
@@ -138,7 +140,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Porabljeno"
+                    android:text="@string/proracun_porabljeno"
                     android:textColor="@color/besediloSivo"
                     android:textSize="13sp" />
 
@@ -182,7 +184,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Porabljeno"
+                        android:text="@string/proracun_porabljeno"
                         android:textColor="@color/besediloSivo"
                         android:textSize="13sp" />
 
@@ -210,7 +212,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Preostalo"
+                        android:text="@string/proracun_preostalo"
                         android:textColor="@color/besediloSivo"
                         android:textSize="13sp" />
 
@@ -245,88 +247,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nasveti za varčevanje"
+                android:text="@string/proracun_nasveti_naslov"
                 android:textColor="@color/besediloTemno"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/ll_nasveti_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/sivaKartica"
-                android:padding="12dp"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zmanjšajte stroške za kavo"
-                    android:textColor="@color/besediloTemno"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pripravite kavo doma namesto v kavarni"
-                    android:textColor="@color/besediloSivo"
-                    android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/sivaKartica"
-                android:padding="12dp"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Načrtujte nakupe"
-                    android:textColor="@color/besediloTemno"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Naredite seznam pred obiskom trgovine"
-                    android:textColor="@color/besediloSivo"
-                    android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/sivaKartica"
-                android:padding="12dp"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Uporabite javni prevoz"
-                    android:textColor="@color/besediloTemno"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prihranite pri stroških za gorivo"
-                    android:textColor="@color/besediloSivo"
-                    android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
+                android:layout_marginTop="4dp" />
 
         </LinearLayout>
 

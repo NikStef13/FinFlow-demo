@@ -36,10 +36,15 @@ public class StrosekAdapter extends ArrayAdapter<Strosek> {
 
         Strosek strosek = getItem(position);
 
-        TextView tvStrosek = convertView.findViewById(R.id.tv_strosek);
+        TextView tvOpis = convertView.findViewById(R.id.tv_opis);
+        TextView tvKategorija = convertView.findViewById(R.id.tv_kategorija);
+        TextView tvZnesek = convertView.findViewById(R.id.tv_znesek);
         ImageButton btnMore = convertView.findViewById(R.id.btn_more);
 
-        tvStrosek.setText(strosek.kategorija + ": €" + strosek.znesek + (strosek.opis.isEmpty() ? "" : " - " + strosek.opis));
+        String opis = strosek.opis.isEmpty() ? strosek.kategorija : strosek.opis;
+        tvOpis.setText(opis);
+        tvKategorija.setText(strosek.kategorija);
+        tvZnesek.setText(String.format("€%.2f", strosek.znesek));
 
         btnMore.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(getContext(), btnMore);
