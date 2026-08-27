@@ -93,20 +93,15 @@ public class CiljiFragment extends Fragment implements CiljAdapter.Listener {
 
     @Override
     public void onIzbrisi(Cilj cilj) {
-        new AlertDialog.Builder(getContext())
-                .setTitle(R.string.cilji_izbrisi_naslov)
-                .setMessage(R.string.cilji_izbrisi_potrditev)
-                .setPositiveButton(R.string.gumb_izbrisi, (dialog, which) -> {
-                    AppDatabase db = AppDatabase.getDatabase(getContext());
-                    AppDatabase.databaseWriteExecutor.execute(() -> {
-                        db.dao().deleteCilj(cilj);
-                        if (getActivity() != null) {
-                            getActivity().runOnUiThread(this::posodobiPrikaz);
-                        }
-                    });
-                })
-                .setNegativeButton(R.string.gumb_preklici, null)
-                .show();
+        DialogHelper.prikaziPotrditev(getContext(), "Izbriši cilj", "Ali res želiš izbrisati ta cilj?", R.color.zelena, () -> {
+            AppDatabase db = AppDatabase.getDatabase(getContext());
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                db.dao().deleteCilj(cilj);
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(this::posodobiPrikaz);
+                }
+            });
+        });
     }
 
     @Override
